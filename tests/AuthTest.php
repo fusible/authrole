@@ -21,10 +21,10 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     public function statusRoleProvider()
     {
         return [
-            [ Status::ANON, Auth::GUEST ],
-            [ Status::EXPIRED, Auth::GUEST ],
-            [ Status::IDLE, Auth::GUEST],
-            [ Status::VALID, Auth::MEMBER ],
+            [ Status::ANON, 'guest' ],
+            [ Status::EXPIRED, 'guest' ],
+            [ Status::IDLE, 'guest'],
+            [ Status::VALID, 'member' ],
         ];
     }
 
@@ -48,7 +48,28 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     {
         $this->auth->setStatus(Status::ANON);
         $this->auth->setUserData(['role' => 'foo']);
-        $this->assertEquals(Auth::GUEST, $this->auth->getRoleId());
+        $this->assertEquals('guest', $this->auth->getRoleId());
     }
 
+    public function testGestRole()
+    {
+        $this->auth->setStatus(Status::ANON);
+        $this->auth->setGuestRole('foo');
+        $this->assertEquals('foo', $this->auth->getRoleId());
+    }
+
+    public function testMemberRole()
+    {
+        $this->auth->setStatus(Status::VALID);
+        $this->auth->setMemberRole('foo');
+        $this->assertEquals('foo', $this->auth->getRoleId());
+    }
+
+    public function testRoleKey()
+    {
+        $this->auth->setStatus(Status::VALID);
+        $this->auth->setUserData(['foo' => 'bar']);
+        $this->auth->setRoleKey('foo');
+        $this->assertEquals('bar', $this->auth->getRoleId());
+    }
 }

@@ -34,9 +34,32 @@ use Zend\Permissions\Acl\Role\RoleInterface;
  * @see RoleInterface
  * @see AuraAuth
  */
-class Auth extends AuraAuth implements RoleInterface
+class AuthDecorator implements RoleInterface
 {
     use AuthRoleTrait;
+
+    /**
+     * Auth
+     *
+     * @var mixed
+     *
+     * @access protected
+     */
+    protected $auth;
+
+    /**
+     * __construct
+     *
+     * @param AuraAuth $auth DESCRIPTION
+     *
+     * @return mixed
+     *
+     * @access public
+     */
+    public function __construct(AuraAuth $auth)
+    {
+        $this->auth = $auth;
+    }
 
     /**
      * Get Role Id
@@ -47,6 +70,33 @@ class Auth extends AuraAuth implements RoleInterface
      */
     public function getRoleId()
     {
-        return $this->getRoleFromAuth($this);
+        return $this->getRoleFromAuth($this->auth);
+    }
+
+    /**
+     * GetAuth
+     *
+     * @return mixed
+     *
+     * @access public
+     */
+    public function getAuth()
+    {
+        return $this->auth;
+    }
+
+    /**
+     * __call
+     *
+     * @param mixed $method DESCRIPTION
+     * @param mixed $params DESCRIPTION
+     *
+     * @return mixed
+     *
+     * @access public
+     */
+    public function __call($method, $params)
+    {
+        return call_user_func_array([$this->auth, $method], $params);
     }
 }
