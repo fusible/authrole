@@ -1,0 +1,28 @@
+{
+    "name": "fusible/authrole",
+    "description": "Integrate Aura\\Auth and Zend\\Permissions\\Acl",
+    "homepage":"https://github.com/fusible/fusible.authrole",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jake johns",
+            "email": "jake@jakejohns.net"
+        }
+    ],
+    "require": {
+        "aura/auth": "^2.0",
+        "zendframework/zend-permissions-acl": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fusible\\AuthRole\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fusible\\AuthRole\\":"tests/",
+            "Aura\\Auth\\": "vendor/aura/auth/tests/"
+        }
+    }
+}
