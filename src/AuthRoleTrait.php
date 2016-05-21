@@ -25,17 +25,17 @@ use Aura\Auth\Auth as AuraAuth;
 /**
  * AuthRoleTrait
  *
- * @category CategoryName
- * @package  PackageName
+ * @category Auth
+ * @package  Fusible\AuthRole
  * @author   Jake Johns <jake@jakejohns.net>
  * @license  http://jnj.mit-license.org/ MIT License
- * @link     http://jakejohns.net
+ * @link     http://github.com/fusible/fusible.authrole
  */
 trait AuthRoleTrait
 {
 
     /**
-     * GuestRole
+     * Guest Role
      *
      * @var string
      *
@@ -44,7 +44,7 @@ trait AuthRoleTrait
     protected $guestRole = 'guest';
 
     /**
-     * MemberRole
+     * Member Role
      *
      * @var string
      *
@@ -53,7 +53,7 @@ trait AuthRoleTrait
     protected $memberRole = 'member';
 
     /**
-     * RoleKey
+     * Role Key
      *
      * Key in `userdata` that should be returned as the RoleID
      *
@@ -64,11 +64,11 @@ trait AuthRoleTrait
     protected $roleKey = 'role';
 
     /**
-     * SetRoleKey
+     * Set Role Key
      *
-     * @param mixed $key DESCRIPTION
+     * @param string $key in userdata where roleId is stored
      *
-     * @return mixed
+     * @return $this
      *
      * @access public
      */
@@ -79,11 +79,11 @@ trait AuthRoleTrait
     }
 
     /**
-     * SetGuestRole
+     * Set Guest Role
      *
-     * @param mixed $role DESCRIPTION
+     * @param string $role role to return when auth is not valid
      *
-     * @return mixed
+     * @return $this
      *
      * @access public
      */
@@ -94,11 +94,11 @@ trait AuthRoleTrait
     }
 
     /**
-     * SetMemberRole
+     * Set Member Role
      *
-     * @param mixed $role DESCRIPTION
+     * @param string $role role to return when auth is valid w/o roleKey
      *
-     * @return mixed
+     * @return $this
      *
      * @access public
      */
@@ -109,9 +109,9 @@ trait AuthRoleTrait
     }
 
     /**
-     * GetRoleFromAuth
+     * Get Role from Auth
      *
-     * @param AuraAuth $auth DESCRIPTION
+     * @param AuraAuth $auth Auth object
      *
      * @return string
      *

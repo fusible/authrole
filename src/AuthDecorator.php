@@ -41,7 +41,7 @@ class AuthDecorator implements RoleInterface
     /**
      * Auth
      *
-     * @var mixed
+     * @var AuraAuth
      *
      * @access protected
      */
@@ -50,9 +50,7 @@ class AuthDecorator implements RoleInterface
     /**
      * __construct
      *
-     * @param AuraAuth $auth DESCRIPTION
-     *
-     * @return mixed
+     * @param AuraAuth $auth underlying Auth object
      *
      * @access public
      */
@@ -74,9 +72,9 @@ class AuthDecorator implements RoleInterface
     }
 
     /**
-     * GetAuth
+     * Get Auth
      *
-     * @return mixed
+     * @return AuraAuth
      *
      * @access public
      */
@@ -86,10 +84,10 @@ class AuthDecorator implements RoleInterface
     }
 
     /**
-     * __call
+     * Magic proxy method calls to AuraAuth
      *
-     * @param mixed $method DESCRIPTION
-     * @param mixed $params DESCRIPTION
+     * @param string $method name of method
+     * @param array  $params params
      *
      * @return mixed
      *
